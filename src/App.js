@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from './styles/logo.svg';
+import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
 
 class App extends Component {
   render() {
+    console.log(this);
     return (
       <div className="App">
         <header className="App-header">
@@ -19,6 +22,16 @@ class App extends Component {
           >
             Learn React
           </a>
+            <button className='btn btn-danger'>HELP ME</button>
+            <Button
+              tag="a"
+              color="success"
+              size="large"
+              href="http://reactstrap.github.io"
+              target="_blank"
+              >
+                Hello
+            </Button>
         </header>
       </div>
     );
