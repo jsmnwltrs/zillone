@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import connection from '../Helpers/data/connection';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Auth from '../components/Auth/auth';
+import Auth from '../components/Auth/Auth';
 import './App.scss';
 
 class App extends Component {
-  componentDidMont() {
+  componentDidMount() {
     connection();
   }
+
   render() {
     return (
       <div className="App">
         <Auth />
       </div>
-    )
+    );
   }
 }
 
