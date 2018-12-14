@@ -3,8 +3,10 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import connection from '../Helpers/data/connection';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Auth from '../components/Auth/Auth';
+import Auth from '../components/Auth/auth';
 import Listings from '../components/Listings/Listing';
+import Buildings from '../components/Building/Building';
+import ListingForm from '../components/ListingForm/ListingForm';
 import MyNavbar from '../components/MyNavbar/MyNavbar';
 import authRequests from '../Helpers/data/authRequests';
 import './App.scss';
@@ -56,6 +58,8 @@ class App extends Component {
       <div className="App">
         <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
         <Listings />
+        <Buildings />
+        <ListingForm />
       </div>
     );
   }
