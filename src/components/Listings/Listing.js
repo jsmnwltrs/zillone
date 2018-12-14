@@ -7,7 +7,7 @@ class Listings extends React.Component {
       <div className="listings">
         <h2>Listings</h2>
         </div>
-    ); 
+    );
   }
 }
 

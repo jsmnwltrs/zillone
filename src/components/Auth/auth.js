@@ -1,5 +1,5 @@
 import React from 'react';
-import './Auth.scss';
+import './auth.scss';
 import authRequests from '../../Helpers/data/authRequests';
 
 class Auth extends React.Component {
