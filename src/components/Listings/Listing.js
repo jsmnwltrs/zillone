@@ -7,14 +7,16 @@ import ListingItem from '../ListingItem/ListingItem';
 class Listings extends React.Component {
   static propType = {
     listings: PropTypes.arrayOf(listingShape),
+    deleteSingleListing: PropTypes.func,
   }
 
   render() {
-    const { listings } = this.props;
+    const { listings, deleteSingleListing } = this.props;
     const listingsItemComponents = listings.map(listing => (
       <ListingItem
-        key={listing.id}
         listing={listing}
+        key={listing.id}
+        deleteSingleListing={deleteSingleListing}
       />
     ));
     return (
