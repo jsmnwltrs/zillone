@@ -2,6 +2,7 @@ import React from 'react';
 import './Listing.scss';
 import PropTypes from 'prop-types';
 import listingShape from '../../Helpers/props/listingShape';
+import ListingItem from '../ListingItem/ListingItem';
 
 class Listings extends React.Component {
   static propType = {
@@ -9,9 +10,17 @@ class Listings extends React.Component {
   }
 
   render() {
+    const { listings } = this.props;
+    const listingsItemComponents = listings.map(listing => (
+      <ListingItem
+        key={listing.id}
+        listing={listing}
+      />
+    ));
     return (
       <div className="listings col">
         <h2>Listings</h2>
+        {listingsItemComponents}
       </div>
     );
   }
