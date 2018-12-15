@@ -4,9 +4,9 @@ import './Listing.scss';
 class Listings extends React.Component {
   render() {
     return (
-      <div className="listings">
+      <div className="listings col">
         <h2>Listings</h2>
-        </div>
+      </div>
     );
   }
 }
