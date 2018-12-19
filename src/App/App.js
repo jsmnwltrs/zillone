@@ -73,7 +73,7 @@ class App extends Component {
         .then(() => {
           listingRequests.getListings()
             .then((listings) => {
-              this.setState({ listings });
+              this.setState({ listings, isEditing: false, editId: '-1' });
             });
         })
         .catch(error => console.error('error on formSubmitEvent', error));
