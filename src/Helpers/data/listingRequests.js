@@ -26,9 +26,12 @@ const postRequest = listing => axios.post(`${firebaseUrl}/listings.json`, listin
 
 const getSingleListing = listingId => axios.get(`${firebaseUrl}/listings/${listingId}.json`);
 
+const putRequest = (listingId, listing) => axios.put(`${firebaseUrl}/listings/${listingId}.json`, listing);
+
 export default {
   getListings,
   deleteListing,
   postRequest,
   getSingleListing,
+  putRequest,
 };
