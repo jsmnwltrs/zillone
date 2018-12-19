@@ -17,6 +17,8 @@ class App extends Component {
   state = {
     authed: false,
     listings: [],
+    isEditing: false,
+    editId: '-1',
   };
 
   componentDidMount() {
@@ -65,17 +67,37 @@ class App extends Component {
   }
 
   formSubmitEvent = (newListing) => {
-    listingRequests.postRequest(newListing)
-      .then(() => {
-        listingRequests.getListings()
-          .then((listings) => {
-            this.setState({ listings });
-          });
-      })
-      .catch(error => console.error('error on formSubmitEvent', error));
+    const { isEditing, editId } = this.state;
+    if (isEditing) {
+      listingRequests.putRequest(editId, newListing)
+        .then(() => {
+          listingRequests.getListings()
+            .then((listings) => {
+              this.setState({ listings, isEditing: false, editId: '-1' });
+            });
+        })
+        .catch(error => console.error('error on formSubmitEvent', error));
+    } else {
+      listingRequests.postRequest(newListing)
+        .then(() => {
+          listingRequests.getListings()
+            .then((listings) => {
+              this.setState({ listings });
+            });
+        })
+        .catch(error => console.error('error on formSubmitEvent', error));
+    }
   }
 
+  passListingToEdit = listingId => this.setState({ isEditing: true, editId: listingId });
+
   render() {
+    const {
+      isEditing,
+      editId,
+      listings,
+      authed,
+    } = this.state;
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({ authed: false });
@@ -84,7 +106,7 @@ class App extends Component {
     if (!this.state.authed) {
       return (
         <div className="App">
-          <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
+          <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent}/>
           <div className="row">
             <Auth isAuthenticated={this.isAuthenticated}/>
           </div>
@@ -93,16 +115,17 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <MyNavbar isAuthed={this.state.authed} logoutClickEvent={logoutClickEvent}/>
+        <MyNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent}/>
         <div className="row">
           <Listings
-          listings={this.state.listings}
+          listings={listings}
           deleteSingleListing={this.deleteOne}
+          passListingToEdit={this.passListingToEdit}
           />
           <Buildings />
         </div>
         <div className="row">
-          <ListingForm onSubmit={this.formSubmitEvent}/>
+          <ListingForm onSubmit={this.formSubmitEvent} isEditing={isEditing} editId={editId}/>
         </div>
       </div>
     );
