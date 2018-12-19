@@ -64,6 +64,17 @@ class App extends Component {
       });
   }
 
+  formSubmitEvent = (newListing) => {
+    listingRequests.postRequest(newListing)
+      .then(() => {
+        listingRequests.getListings()
+          .then((listings) => {
+            this.setState({ listings });
+          });
+      })
+      .catch(error => console.error('error on formSubmitEvent', error));
+  }
+
   render() {
     const logoutClickEvent = () => {
       authRequests.logoutUser();
@@ -91,7 +102,7 @@ class App extends Component {
           <Buildings />
         </div>
         <div className="row">
-          <ListingForm />
+          <ListingForm onSubmit={this.formSubmitEvent}/>
         </div>
       </div>
     );
