@@ -1,7 +1,6 @@
 import axios from 'axios';
 import apiKeys from '../apiKeys';
 
-
 const firebaseUrl = apiKeys.firebaseConfig.databaseURL;
 
 const getListings = () => new Promise((resolve, reject) => {
@@ -23,7 +22,10 @@ const getListings = () => new Promise((resolve, reject) => {
 
 const deleteListing = listingId => axios.delete(`${firebaseUrl}/listings/${listingId}.json`);
 
+const postRequest = listing => axios.post(`${firebaseUrl}/listings.json`, listing);
+
 export default {
   getListings,
   deleteListing,
+  postRequest,
 };
